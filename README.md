@@ -1,6 +1,6 @@
 # Karmabot
 
-Karmabot is a Slack App written in Go. In order to run the karmabot, you will first need to create a new Slack App. 
+Karmabot is a Slack App written in Go. In order to run the karmabot, you will first need to create a new Slack App.
 
 ## Slack App Configuration
 
@@ -9,17 +9,21 @@ Karmabot is a Slack App written in Go. In order to run the karmabot, you will fi
 - Specify the workspace where you want to add the app.
 - Copy and paste the contents of the app-manifest.yml file.
 - Review the summary and click "Create".
+- Generate an App-Level token with any name and the scope `connections:write`
 
 ## Configuring your environment
 
 Karmabot expects the following environment variables
 
-* ENVIRONMENT - This should be either "development" or "production". 
+* ENVIRONMENT - This should be either "development" or "production".
   * This only affects log level. DEBUG and up will be logged for development, INFO and up for production.
-* SLACK_BOT_TOKEN - Slack Bot User OAuth token 
+* SLACK_BOT_TOKEN - Slack Bot User OAuth token
   * Found under Features - OAuth & Permissions - Bot User OAuth Token. Will begin with `xoxb`.
 * SLACK_BOT_USER - Slack Bot User ID
-  * Found by calling the slack auth.test API with your SLACK_BOT_TOKEN (https://api.slack.com/methods/auth.test)
+  * Found by calling the slack auth.test API with your SLACK_BOT_TOKEN (https://api.slack.com/methods/auth.test). Specify the value of `bot_id` from the response:
+        ```
+curl -X POST -d token=SLACK_BOT_TOKEN https://slack.com/api/auth.test
+        ```
 * SLACK_APP_TOKEN - Slack App-Level Token
   * Found under Basic Information - App-Level Tokens. Click on the name of the token. Will begin with `xapp`.
 * KARMAFILE - Path to the file where the karma data is stored.
